@@ -1,0 +1,31 @@
+{
+    "name": "node-bb",
+    "description": "",
+    "version": "0.0.1",
+    "licenses": [{
+        "type": "MIT",
+        "url": "https://github.com/roylines/node-bb/raw/master/LICENSE"
+    }],
+    "author": {
+        "name": "Roy Lines",
+        "url": "https://roylines.co.uk"
+    },
+    "repository": {
+        "type": "git",
+        "url": "http://github.com/roylines/node-bb.git"
+    },
+    "dependencies": {
+        "express": "3.0.0rc3"
+    },
+    "devDependencies": {
+        "mocha": "x.x.x",
+        "sinon": "x.x.x"
+    },
+    "main": "./lib/bb",
+    "scripts": {
+        "test": "mocha test/*_test.js --reporter spec"
+    },
+    "engines": {
+        "node": ">= 0.4.0"
+    }
+}
