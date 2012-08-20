@@ -28,6 +28,7 @@
         "test": "mocha test/*_test.js --reporter spec"
     },
     "engines": {
-        "node": ">= 0.4.0"
+        "node": "0.8.x",
+        "npm":  "1.1.x"
     }
 }
