@@ -15,7 +15,9 @@
         "url": "http://github.com/roylines/node-bb.git"
     },
     "dependencies": {
-        "express": "3.0.0rc3"
+        "express": "3.0.0rc3",
+        "pivotal": "0.1.3",
+        "winston": "0.6.2"
     },
     "devDependencies": {
         "mocha": "x.x.x",
