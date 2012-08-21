@@ -15,7 +15,9 @@
         "url": "http://github.com/roylines/node-bb.git"
     },
     "dependencies": {
+        "async": "0.1.22",
         "express": "3.0.0rc3",
+        "mongodb": "1.1.4",
         "pivotal": "0.1.3",
         "winston": "0.6.2"
     },
