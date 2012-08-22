@@ -5,14 +5,8 @@ var assert = require('assert'),
 
 describe('pivotal', function() {
 	describe('a user with a token', function() {
-		var user = null;
-		before(function() {
-			user = {
-				tokens: {
-					pivotal: 'TOKEN'
-				}
-			};
-		});
+		var token = 'TOKEN';
+
 		describe('and calling getProjects with valid token', function() {
 			var data = null;
 			before(function(done) {
@@ -23,7 +17,7 @@ describe('pivotal', function() {
 					{ id: 'ID1', name: 'NAME1', other: 'OTHER1'},
 					{ id: 'ID2', name: 'NAME2', other: 'OTHER2'}
 				]});
-				pivotal.getProjects(user, function(e, d) {
+				pivotal.getProjects(token, function(e, d) {
 					data = d;
 					done(e, d);
 				});
