@@ -9,13 +9,16 @@ describe('server', function() {
 		sinon.stub(routes, 'bind');
 		sinon.stub(winston, 'info');
 		server._port = 42;
-		server._app = sinon.stub();
-		server._app.listen = sinon.stub();
-		server._app.listen.yields();
+		globals.app = sinon.stub();
+		globals.app.set = sinon.stub();
+		globals.app.use = sinon.stub();
+		globals.app.listen = sinon.stub();
+		globals.app.listen.yields();
 	});
 	after(function() {
 		routes.bind.restore();
 		winston.info.restore();
+		globals.app = undefined;
 	});
 	describe('start', function() {
 		before(function() {
@@ -25,8 +28,8 @@ describe('server', function() {
 			assert(routes.bind.calledOnce);
 		});
 		it('should listen on correct port', function() {
-			assert(server._app.listen.calledOnce);
-			assert.equal(server._app.listen.firstCall.args[0], 42);
+			assert(globals.app.listen.calledOnce);
+			assert.equal(globals.app.listen.firstCall.args[0], 42);
 		});
 		it('should log started', function() {
 			assert(winston.info.calledOnce);
