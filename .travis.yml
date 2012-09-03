@@ -1,4 +1,11 @@
- language: node_js
- node_js:
-   - "0.8"
-   - "0.6"
+language: node_js
+node_js:
+  - "0.8"
+  - "0.6"
+services:
+  - mongodb
+before_script:
+  - mongo bb --eval 'db.addUser("travis", "test");'
+env:
+  - BB_MONGO_USER=travis
+  - BB_MONGO_PASSWORD=test
