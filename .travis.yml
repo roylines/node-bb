@@ -6,6 +6,4 @@ services:
   - mongodb
 before_script:
   - mongo bb --eval 'db.addUser("travis", "test");'
-env:
-  - BB_MONGO_USER=travis
-  - BB_MONGO_PASSWORD=test
+env: BB_MONGO_USER=travis BB_MONGO_PASSWORD=test
