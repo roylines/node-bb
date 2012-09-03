@@ -6,30 +6,30 @@ var assert = require('assert'),
 
 describe('server', function() {
 	before(function() {
-		sinon.stub(routes, 'bind');
+		sinon.stub(routes, 'configure');
 		sinon.stub(winston, 'info');
 		server._port = 42;
-		globals.app = sinon.stub();
-		globals.app.set = sinon.stub();
-		globals.app.use = sinon.stub();
-		globals.app.listen = sinon.stub();
-		globals.app.listen.yields();
+		server._app = sinon.stub();
+		server._app.set = sinon.stub();
+		server._app.use = sinon.stub();
+		server._app.listen = sinon.stub();
+		server._app.listen.yields();
 	});
 	after(function() {
-		routes.bind.restore();
+		routes.configure.restore();
 		winston.info.restore();
-		globals.app = undefined;
+		server._app = undefined;
 	});
 	describe('start', function() {
 		before(function() {
 			server.start();
 		});
-		it('should bind routes', function() {
-			assert(routes.bind.calledOnce);
+		it('should configure routes', function() {
+			assert(routes.configure.calledOnce);
 		});
 		it('should listen on correct port', function() {
-			assert(globals.app.listen.calledOnce);
-			assert.equal(globals.app.listen.firstCall.args[0], 42);
+			assert(server._app.listen.calledOnce);
+			assert.equal(server._app.listen.firstCall.args[0], 42);
 		});
 		it('should log started', function() {
 			assert(winston.info.calledOnce);
