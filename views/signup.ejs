@@ -4,8 +4,13 @@
         <div class="span12">
           <form>
             <legend>Create your personal account</legend>
+            <label>Username</label>
+            <input id="username" type="text" placeholder="" autofocus="autofocus">
+            <span id="usernameNotOK" class="help-inline"><i class="icon-remove"></i> This username is not available</span>
+            <span id="usernameChecking" class="help-inline">Checking availability...</span>
+            <span id="usernameOK" class="help-inline"><i class="icon-ok"></i> Username OK</span>
             <label>Email Address</label>
-            <input id="email" type="text" placeholder="" autofocus="autofocus">
+            <input id="email" type="text" placeholder="">
             <label>Password</label>
             <input id="password" type="password" placeholder="">
             <span class="help-block">Must contain one lowercase letter, one number, and be at least 7 characters long.</span>
@@ -17,4 +22,38 @@
         </div>
       </div>
     </div>
+  <script>
+    $(document).ready(function () {
+    $('#usernameOK').hide();
+    $('#usernameChecking').hide();
+    $('#usernameNotOK').hide();
+    //var validateUsername = $('#validateUsername');
+    $('#username').keyup(function () {
+      var t = this;
+      $('#usernameOK').hide();
+      $('#usernameChecking').hide();
+      $('#usernameNotOK').hide();
+      if (this.value && this.value != this.lastValue) {
+        $('#usernameChecking').show();
+        if (this.timer) clearTimeout(this.timer);
+        this.timer = setTimeout(function () {
+          $.ajax({
+            url: '/users/available?name=' + t.value,
+            type: 'post',
+            success: function (j) {
+              $('#usernameOK').show();
+              $('#usernameChecking').hide();
+            },
+            error: function(j) {
+              $('#usernameChecking').hide();
+              $('#usernameNotOK').show();
+            }
+          });
+        }, 200);
+
+        this.lastValue = this.value;
+      }
+    });
+    });
+  </script>
 <% include footer %>
