@@ -4,49 +4,66 @@
         <div class="span12">
           <form>
             <legend>Create your personal account</legend>
+
             <label>Username</label>
             <input id="username" type="text" placeholder="" autofocus="autofocus">
-            <span id="usernameNotOK" class="help-inline"><i class="icon-remove"></i> This username is not available</span>
-            <span id="usernameChecking" class="help-inline">Checking availability...</span>
-            <span id="usernameOK" class="help-inline"><i class="icon-ok"></i> Username OK</span>
+            <span id="usernameNotOK" class="label label-important"></span>
+            <span id="usernameOK" class="label label-success"><i class="icon-ok icon-white"></i></span>
+
             <label>Email Address</label>
             <input id="email" type="text" placeholder="">
+
             <label>Password</label>
             <input id="password" type="password" placeholder="">
             <span class="help-block">Must contain one lowercase letter, one number, and be at least 7 characters long.</span>
+
             <label>Confirm Password</label>
             <input id="confirm"type="password" placeholder="">
             <br/>
+
             <button type="submit" class="btn btn-primary disabled" disabled="disabled">Create an account</button>
           </form>
         </div>
       </div>
     </div>
   <script>
+    var setUserNameChecking = function() {
+      $('#usernameOK').hide();
+      $('#usernameNotOK').hide();
+    };
+
+    var setUserNameStatus = function(text, ok) {
+      if(ok) {
+        $('#usernameOK').html('<i class="icon-ok icon-white"></i> ' + text);
+        $('#usernameOK').show();
+        $('#usernameNotOK').hide();
+      } else {
+        $('#usernameNotOK').html('<i class="icon-remove icon-white"></i> ' + text);
+        $('#usernameOK').hide();
+        $('#usernameNotOK').show();
+      }
+    };
+
     $(document).ready(function () {
+
     $('#usernameOK').hide();
-    $('#usernameChecking').hide();
     $('#usernameNotOK').hide();
-    //var validateUsername = $('#validateUsername');
+
     $('#username').keyup(function () {
       var t = this;
-      $('#usernameOK').hide();
-      $('#usernameChecking').hide();
-      $('#usernameNotOK').hide();
       if (this.value && this.value != this.lastValue) {
-        $('#usernameChecking').show();
+        setUserNameChecking();
+
         if (this.timer) clearTimeout(this.timer);
         this.timer = setTimeout(function () {
           $.ajax({
             url: '/users/available?name=' + t.value,
             type: 'post',
-            success: function (j) {
-              $('#usernameOK').show();
-              $('#usernameChecking').hide();
+            success: function (jqr) {
+              setUserNameStatus(jqr, true);
             },
-            error: function(j) {
-              $('#usernameChecking').hide();
-              $('#usernameNotOK').show();
+            error: function(jqr) {
+              setUserNameStatus(jqr.responseText, false);
             }
           });
         }, 200);
