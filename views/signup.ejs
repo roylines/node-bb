@@ -6,17 +6,17 @@
           <form class="form-horizontal">
             <legend>Create your personal account</legend>
             <div class="control-group">
-              <input id="username" type="text" placeholder="Username" autofocus="autofocus" autocomplete="off">
+              <input id="username" type="text" placeholder="Username" autofocus="autofocus" autocomplete="off" tabindex="1">
               <span id="username-help" class="help-text"></span>
             </div>
             <div class="control-group">
-              <input id="email" type="text" placeholder="Email">
+              <input id="email" type="text" placeholder="Email" tabindex="2">
             </div>
             <div class="control-group">
-            <input id="password" type="password" placeholder="Password">
+            <input id="password" type="password" placeholder="Password" tabindex="3">
             </div>
             <% include recaptcha %>
-            <button type="submit" class="btn btn-primary disabled" disabled="disabled">Create an account</button>
+            <button type="submit" class="btn btn-primary disabled" disabled="disabled" tabindex="5">Create an account</button>
           </form>
         </div>
       </div>
