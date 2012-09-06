@@ -2,10 +2,11 @@
     <div class="container">
       <div class="row">
         <div class="span6 offset3">
+          <% include recaptchaOptions %>
           <form class="form-horizontal">
             <legend>Create your personal account</legend>
             <div class="control-group">
-              <input id="username" type="text" placeholder="Username" autofocus="autofocus">
+              <input id="username" type="text" placeholder="Username" autofocus="autofocus" autocomplete="off">
               <span id="username-help" class="help-text"></span>
             </div>
             <div class="control-group">
@@ -14,7 +15,7 @@
             <div class="control-group">
             <input id="password" type="password" placeholder="Password">
             </div>
-            <%- recaptcha %>
+            <% include recaptcha %>
             <button type="submit" class="btn btn-primary disabled" disabled="disabled">Create an account</button>
           </form>
         </div>
