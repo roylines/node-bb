@@ -16,7 +16,7 @@
             <input id="password" type="password" placeholder="Password" tabindex="3">
             </div>
             <% include recaptcha %>
-            <button type="submit" class="btn btn-primary disabled" disabled="disabled" tabindex="5">Create an account</button>
+            <button id="submit" type="submit" class="btn btn-primary disabled" disabled="disabled" tabindex="5">Create an account</button>
           </form>
         </div>
       </div>
@@ -25,6 +25,18 @@
 
     var setUserNameStatus = function(text, type) {
       $('#username-help').attr('class', 'help-text help-' + type).html(text);
+      setSubmitStatus();
+    };
+
+    var setSubmitStatus = function() {
+      var newClass = 'btn btn-primary disabled';
+      var disabled = 'disabled';
+
+      if($('#username-help').hasClass('help-ok')) {
+        $('#submit').attr('class', 'btn btn-primary').removeAttr('disabled');
+      } else {
+        $('#submit').attr('class', 'btn btn-primary disabled').attr('disabled', disabled);
+      }
     };
 
     $(document).ready(function () {
