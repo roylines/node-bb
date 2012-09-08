@@ -1,5 +1,4 @@
 var assert = require('assert'),
-		// sinon = require('sinon'),
 		store = require('../lib/store.js');
 
 describe('store', function() {
