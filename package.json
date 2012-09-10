@@ -24,8 +24,8 @@
         "winston": "0.6.2"
     },
     "devDependencies": {
-        "mocha": "x.x.x",
-        "sinon": "x.x.x"
+        "mocha": "1.4.2",
+        "sinon": "1.4.2"
     },
     "main": "./lib/bb",
     "scripts": {
