@@ -3,6 +3,9 @@ var assert = require('assert'),
 
 describe('store', function() {
   describe('with a closed store', function() {
+    before(function() {
+      store.close();
+    });
     it('calling getCollection should error', function(done) {
       store.getCollection('users', function(e) {
         assert(e);
