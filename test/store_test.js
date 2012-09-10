@@ -23,6 +23,7 @@ describe('store', function() {
       describe('calling getCollection', function() {
         var collection = null;
         before(function(done) {
+          this.timeout(20000);
           store.getCollection('x', function(e, c) {
             collection = c;
             done(e, c);

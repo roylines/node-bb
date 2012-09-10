@@ -1,3 +1,3 @@
 var server = require('./lib/server.js');
 
-server.start();
+server.start(function() {});
