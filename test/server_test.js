@@ -13,6 +13,7 @@ describe('server', function() {
 			});
 			after(function() {
 				winston.info.restore();
+				store.close();
 			});
 			it('should not throw', function(done) {
 				this.timeout(20000);
