@@ -7,15 +7,15 @@
             <legend>Create your personal account</legend>
             <div class="control-group">
               <input id="username" name="username" type="text" placeholder="Username" autofocus="autofocus" autocomplete="off" tabindex="1">
-              <span id="username-help" class="help-text help-error"><%= errors.username %></span>
+              <span id="username-help" class="help-text help-error"><% if(errors) { %> <%=errors.username %> <% }%></span>
             </div>
             <div class="control-group">
               <input id="email" name="email" type="text" placeholder="Email" tabindex="2">
-              <span id="email-help" class="help-text help-error"><%= errors.email %></span>
+              <span id="email-help" class="help-text help-error"><% if(errors) { %> <%=errors.email %> <% }%></span>
             </div>
             <div class="control-group">
               <input id="password" name="password" type="password" placeholder="Password" tabindex="3">
-              <span id="password-help" class="help-text help-error"><%= errors.password %></span>
+              <span id="password-help" class="help-text help-error"><% if(errors) { %> <%=errors.password %> <% }%></span>
             </div>
             <% include recaptcha %>
             <button id="submit" type="submit" class="btn btn-primary disabled" disabled="disabled" tabindex="5">Create an account</button>
