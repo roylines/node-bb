@@ -1,14 +1,15 @@
- <script type="text/javascript"
-    src="http://www.google.com/recaptcha/api/challenge?k=<%= recaptcha %>">
- </script>
- <noscript>
-   <iframe src="http://www.google.com/recaptcha/api/noscript?k=<%= recaptcha %>"
-        height="300" width="500" frameborder="0"></iframe><br>
-   <textarea name="recaptcha_challenge_field" rows="3" cols="40">
-   </textarea>
-   <input type="hidden" name="recaptcha_response_field"
-        value="manual_challenge">
- </noscript>
+ <div class="control-group">
+   <script type="text/javascript"
+      src="http://www.google.com/recaptcha/api/challenge?k=<%= recaptcha %>">
+   </script>
+   <noscript>
+     <iframe src="http://www.google.com/recaptcha/api/noscript?k=<%= recaptcha %>" height="300" width="500" frameborder="0"></iframe><br>
+     <textarea name="recaptcha_challenge_field" rows="3" cols="40">
+     </textarea>
+     <input type="hidden" name="recaptcha_response_field" value="manual_challenge">
+   </noscript>
+   <span id="recaptcha-help" class="help-text help-error"></span>
+</div>
 
  <script type="text/javascript">
  $(document).ready(function () {
