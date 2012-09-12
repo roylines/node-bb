@@ -49,7 +49,7 @@
         if (inputField.timer) clearTimeout(inputField.timer);
         inputField.timer = setTimeout(function () {
           $.ajax({
-            url: url + id + '=' + inputField.value,
+            url: url + inputField.value,
             type: 'post',
             success: function (jqr) {
               setHelpText('#' + id + '-help', jqr, 'ok');
@@ -65,11 +65,11 @@
     };
 
     var checkUsername = function() {
-      check('username', '/users/validate?');
+      check('username', '/users/validate/username?value=');
     }
 
     var checkEmail = function() {
-      check('email', '/users/validate?');
+      check('email', '/users/validate/email?value=');
     }
 
     var bindChecker = function(id, checker) {
