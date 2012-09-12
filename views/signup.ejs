@@ -49,7 +49,7 @@
         if (username.timer) clearTimeout(username.timer);
         username.timer = setTimeout(function () {
           $.ajax({
-            url: '/users/available?name=' + username.value,
+            url: '/users/validate?username=' + username.value,
             type: 'post',
             success: function (jqr) {
               setUserNameStatus(jqr, 'ok');
