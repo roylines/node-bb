@@ -25,8 +25,8 @@
     </div>
   <script type="text/javascript">
 
-    var setUserNameStatus = function(text, type) {
-      $('#username-help').attr('class', 'help-text help-' + type).html(text);
+    var setHelpText = function(id, text, type) {
+      $(id).attr('class', 'help-text help-' + type).html(text);
       setSubmitStatus();
     };
 
@@ -41,32 +41,45 @@
       }
     };
 
-    var checkUsername = function () {
-      var username = $('#username')[0];
-      if (username.value && username.value != username.lastValue) {
-        setUserNameStatus('Checking...', 'warning');
+    var check = function (id, url) {
+      var inputField = $('#' + id)[0];
+      if (inputField.value && inputField.value != inputField.lastValue) {
+        setHelpText('#' + id + '-help', 'Checking...', 'warning');
 
-        if (username.timer) clearTimeout(username.timer);
-        username.timer = setTimeout(function () {
+        if (inputField.timer) clearTimeout(inputField.timer);
+        inputField.timer = setTimeout(function () {
           $.ajax({
-            url: '/users/validate?username=' + username.value,
+            url: url + id + '=' + inputField.value,
             type: 'post',
             success: function (jqr) {
-              setUserNameStatus(jqr, 'ok');
+              setHelpText('#' + id + '-help', jqr, 'ok');
             },
             error: function(jqr) {
-              setUserNameStatus(jqr.responseText, 'error');
+              setHelpText('#' + id + '-help', jqr.responseText, 'error');
             }
           });
         }, 200);
 
-        username.lastValue = username.value;
+        inputField.lastValue = inputField.value;
       }
     };
 
+    var checkUsername = function() {
+      check('username', '/users/validate?');
+    }
+
+    var checkEmail = function() {
+      check('email', '/users/validate?');
+    }
+
+    var bindChecker = function(id, checker) {
+      $(id).keyup(checker);
+      checker();
+    }
+
     $(document).ready(function () {
-      $('#username').keyup(checkUsername);
-      checkUsername();
+      bindChecker('#username', checkUsername);
+      bindChecker('#email', checkEmail);
     });
   </script>
 <% include footer %>
