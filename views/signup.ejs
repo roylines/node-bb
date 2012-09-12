@@ -41,17 +41,15 @@
       }
     };
 
-    $(document).ready(function () {
-
-    $('#username').keyup(function () {
-      var t = this;
-      if (this.value && this.value != this.lastValue) {
+    var checkUsername = function () {
+      var username = $('#username')[0];
+      if (username.value && username.value != username.lastValue) {
         setUserNameStatus('Checking...', 'warning');
 
-        if (this.timer) clearTimeout(this.timer);
-        this.timer = setTimeout(function () {
+        if (username.timer) clearTimeout(username.timer);
+        username.timer = setTimeout(function () {
           $.ajax({
-            url: '/users/available?name=' + t.value,
+            url: '/users/available?name=' + username.value,
             type: 'post',
             success: function (jqr) {
               setUserNameStatus(jqr, 'ok');
@@ -62,9 +60,13 @@
           });
         }, 200);
 
-        this.lastValue = this.value;
+        username.lastValue = username.value;
       }
-    });
+    };
+
+    $(document).ready(function () {
+      $('#username').keyup(checkUsername);
+      checkUsername();
     });
   </script>
 <% include footer %>
