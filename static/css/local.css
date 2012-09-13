@@ -1,5 +1,21 @@
-body {
-  padding-top: 60px;
+
+header {
+  background: url(/img/header.jpg) repeat-x center;
+  margin-bottom: 40px;
+  padding: 1px;
+  -webkit-font-smoothing: antialiased;
+}
+
+header > h1 {
+  margin-left:80px;
+  font-family: 'Lobster', cursive;
+}
+
+header > h1 > small{
+  font-family: 'Changa One', cursive;
+  font-size: 20px;
+  color: #222;
+  margin-left:20px;
 }
 
 .help-text {

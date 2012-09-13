@@ -1,15 +1,12 @@
-# humanstxt.org/
-# The humans responsible & technology colophon
+/* TEAM */
+  Chef:Roy Lines
+  Contact: roy [at] roylines.co.uk
+  Twitter: @roylinesuk
+  From:Oxfordshire, United Kingdom
 
-# TEAM
+/* SITE */
+  Last update: YYYY/MM/DD
+  Standards: HTML5, CSS3
+  Components: Modernizr, jQuery, Bootstrap
 
-    <name> -- <role> -- <twitter>
 
-# THANKS
-
-    <name>
-
-# TECHNOLOGY COLOPHON
-
-    HTML5, CSS3
-    jQuery, Modernizr
