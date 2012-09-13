@@ -30,6 +30,24 @@ describe('views', function() {
     });
   });
 
+  describe('account', function() {
+    it('should not error', function() {
+      views.account(request, response);
+    });
+    it('should call render once', function() {
+      views.account(request, response);
+      assert.equal(response.render.calledOnce, true);
+    });
+    it('should pass render the correct view', function() {
+      views.account(request, response);
+      assert.equal(response.render.args[0][0], 'account');
+    });
+    it('should pass render the correct meta', function() {
+      views.account(request, response);
+      assert.deepEqual(response.render.args[0][1], {title : "Manage Your Account"});
+    });
+  });
+
   describe('signup', function() {
     before(function() {
       sinon.stub(recaptcha, 'publicKey');
