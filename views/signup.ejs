@@ -1,29 +1,23 @@
 <% include header %>
-    <div class="container">
-      <div class="row">
-        <div class="span6 offset3">
-          <% include recaptchaOptions %>
-          <form action="/users/create" method="post" class="form-horizontal">
-            <legend>Create your personal account</legend>
-            <div class="control-group">
-              <input id="username" name="username" type="text" placeholder="Username" autofocus="autofocus" autocomplete="off" tabindex="1" value="<% if(values.username) { %> <%=values.username %> <% }%>">
-              <span id="username-help" class="help-text help-error"><% if(errors) { %> <%=errors.username %> <% }%></span>
-            </div>
-            <div class="control-group">
-              <input id="email" name="email" type="text" placeholder="Email" tabindex="2" value="<% if(values.email) { %> <%=values.email %> <% }%>">
-              <span id="email-help" class="help-text help-error"><% if(errors) { %> <%=errors.email %> <% }%></span>
-            </div>
-            <div class="control-group">
-              <input id="password" name="password" type="password" placeholder="Password" tabindex="3" value="<% if(values.password) { %> <%=values.password %> <% }%>">
-              <span id="password-help" class="help-text help-error"><% if(errors) { %> <%=errors.password %> <% }%></span>
-            </div>
-            <% include recaptcha %>
-            <button id="submit" type="submit" class="btn btn-primary disabled" disabled="disabled" tabindex="5">Create an account</button>
-          </form>
-        </div>
-      </div>
-    </div>
-  <script type="text/javascript">
+<% include recaptchaOptions %>
+<form action="/users/create" method="post" class="form-horizontal">
+  <legend>Create your personal account</legend>
+  <div class="control-group">
+    <input id="username" name="username" type="text" placeholder="Username" autofocus="autofocus" autocomplete="off" tabindex="1" value="<% if(values.username) { %> <%=values.username %> <% }%>">
+    <span id="username-help" class="help-text help-error"><% if(errors) { %> <%=errors.username %> <% }%></span>
+  </div>
+  <div class="control-group">
+    <input id="email" name="email" type="text" placeholder="Email" tabindex="2" value="<% if(values.email) { %> <%=values.email %> <% }%>">
+    <span id="email-help" class="help-text help-error"><% if(errors) { %> <%=errors.email %> <% }%></span>
+  </div>
+  <div class="control-group">
+    <input id="password" name="password" type="password" placeholder="Password" tabindex="3" value="<% if(values.password) { %> <%=values.password %> <% }%>">
+    <span id="password-help" class="help-text help-error"><% if(errors) { %> <%=errors.password %> <% }%></span>
+  </div>
+  <% include recaptcha %>
+  <button id="submit" type="submit" class="btn btn-primary disabled" disabled="disabled" tabindex="5">Create an account</button>
+</form>
+<script type="text/javascript">
 
     var setHelpText = function(id, text, type) {
       $(id).attr('class', 'help-text help-' + type).html(text);
@@ -81,5 +75,5 @@
       bindChecker('#username', checkUsername);
       bindChecker('#email', checkEmail);
     });
-  </script>
+</script>
 <% include footer %>
