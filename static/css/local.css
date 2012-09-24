@@ -8,6 +8,17 @@ header {
   background: url(/img/header.jpg) repeat center;
   font-family: 'Lobster', cursive;
   -webkit-font-smoothing: antialiased;
+  padding: 1px;
+  height:52px;
+}
+
+header > h1, nav > ul > li, nav {
+  display: inline-block;
+}
+
+header > h1 {
+  margin-left: 20px;
+  line-height: 10px;
 }
 
 a, a:active, a:hover, a:focus {
