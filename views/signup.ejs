@@ -1,6 +1,6 @@
 <% include header %>
 <% include recaptchaOptions %>
-<form action="/users/create" method="post" class="form-horizontal">
+<form action="/users/create" method="post">
   <legend>Create your personal account</legend>
   <div class="control-group">
     <input id="username" name="username" type="text" placeholder="Username" autofocus="autofocus" autocomplete="off" tabindex="1" value="<% if(values.username) { %> <%=values.username %> <% }%>">
@@ -17,6 +17,7 @@
   <% include recaptcha %>
   <button id="submit" type="submit" class="btn btn-primary disabled" disabled="disabled" tabindex="5">Create an account</button>
 </form>
+
 <script type="text/javascript">
 
     var setHelpText = function(id, text, type) {

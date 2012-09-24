@@ -4,20 +4,14 @@ body {
   padding:0;
 }
 
-.center {
-  text-align: center;
-}
-
 header {
   background: url(/img/header.jpg) repeat center;
-  margin-bottom: 40px;
-  padding: 1px;
+  font-family: 'Lobster', cursive;
   -webkit-font-smoothing: antialiased;
 }
 
-header > h1 {
-  margin-left:10%;
-  font-family: 'Lobster', cursive;
+a, a:active, a:hover, a:focus {
+  color: #333;
 }
 
 .help-text {
