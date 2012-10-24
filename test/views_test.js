@@ -26,7 +26,10 @@ describe('views', function() {
     });
     it('should pass render the correct meta', function() {
       views.home(request, response);
-      assert.deepEqual(response.render.args[0][1], {title : "BendyBoards"});
+      var meta = response.render.args[0][1];
+
+      assert.equal(meta.title, "Bendy:Boards");
+      assert.equal(meta.description, "Measure, Reflect, Improve");
     });
   });
 
@@ -44,7 +47,10 @@ describe('views', function() {
     });
     it('should pass render the correct meta', function() {
       views.account(request, response);
-      assert.deepEqual(response.render.args[0][1], {title : "Manage Your Account"});
+      var meta = response.render.args[0][1];
+
+      assert.equal(meta.title, "Manage Your Account");
+      assert.equal(meta.description, "Manage Your Account");
     });
   });
 
@@ -71,11 +77,13 @@ describe('views', function() {
     });
     it('should pass render the correct meta', function() {
       views.signup(request, response);
-      assert.deepEqual(response.render.args[0][1], {
-        title:"Sign up BendyBoards",
-        recaptcha:"PUBKEY",
-        errors:"ERRORS",
-        values:"THEBODY"});
+      var meta = response.render.args[0][1];
+
+      assert.equal(meta.title, "Register for Bendy:Boards");
+      assert.equal(meta.description, "Create your personal account");
+      assert.equal(meta.recaptcha, "PUBKEY");
+      assert.equal(meta.errors, "ERRORS");
+      assert.equal(meta.values, "THEBODY");
     });
   });
 });

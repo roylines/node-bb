@@ -4,12 +4,31 @@ body {
   padding:0;
 }
 
-header {
-  background: url(/img/header.jpg) repeat center;
-  font-family: 'Lobster', cursive;
-  -webkit-font-smoothing: antialiased;
+.hero {
+  text-align: center;
+  background: url(/img/hero1.jpg) repeat center;
+  padding: 20px;
 }
 
+header {
+  padding: 5px;
+}
+
+header > h1 > a,
+header > h1 > a:hover,
+header > h1 > a:active,
+header > h1 > a:focus {
+  font-family: 'Lobster', cursive;
+  -webkit-font-smoothing: antialiased;
+  color : white;
+  font-size: 48px;
+}
+
+a, a:active, a:hover, a:focus {
+  color: #333;
+}
+
+/*
 a, a:active, a:hover, a:focus {
   color: #333;
 }
@@ -29,3 +48,4 @@ a, a:active, a:hover, a:focus {
 .help-ok {
   color: #468847
 }
+*/

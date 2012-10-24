@@ -1,80 +1,106 @@
-<% include header %>
-<% include recaptchaOptions %>
-<form action="/users/create" method="post">
-  <legend>Create your personal account</legend>
-  <div class="control-group">
-    <input id="username" name="username" type="text" placeholder="Username" autofocus="autofocus" autocomplete="off" tabindex="1" value="<% if(values.username) { %> <%=values.username %> <% }%>">
-    <span id="username-help" class="help-text help-error"><% if(errors) { %> <%=errors.username %> <% }%></span>
-  </div>
-  <div class="control-group">
-    <input id="email" name="email" type="text" placeholder="Email" tabindex="2" value="<% if(values.email) { %> <%=values.email %> <% }%>">
-    <span id="email-help" class="help-text help-error"><% if(errors) { %> <%=errors.email %> <% }%></span>
-  </div>
-  <div class="control-group">
-    <input id="password" name="password" type="password" placeholder="Password" tabindex="3" value="<% if(values.password) { %> <%=values.password %> <% }%>">
-    <span id="password-help" class="help-text help-error"><% if(errors) { %> <%=errors.password %> <% }%></span>
-  </div>
-  <% include recaptcha %>
-  <button id="submit" type="submit" class="btn btn-primary disabled" disabled="disabled" tabindex="5">Create an account</button>
-</form>
+<!DOCTYPE html>
+<html>
+  <head>
+<% include includes/header %>
+    <script type="text/javascript">var RecaptchaOptions = { theme : 'clean' };</script>
+  </head>
+  <body>
+    <header>
+      <h1><%= title %></h1>
+    </header>
 
-<script type="text/javascript">
+    <form action="/users/create" method="post">
+      <legend><%= description %></legend>
+      <div class="control-group">
+        <input id="username" name="username" type="text" placeholder="Username" autofocus="autofocus" autocomplete="off" tabindex="1" value="<% if(values.username) { %> <%=values.username %> <% }%>">
+        <span id="username-help" class="help-text help-error"><% if(errors) { %> <%=errors.username %> <% }%></span>
+      </div>
+      <div class="control-group">
+        <input id="email" name="email" type="text" placeholder="Email" tabindex="2" value="<% if(values.email) { %> <%=values.email %> <% }%>">
+        <span id="email-help" class="help-text help-error"><% if(errors) { %> <%=errors.email %> <% }%></span>
+      </div>
+      <div class="control-group">
+        <input id="password" name="password" type="password" placeholder="Password" tabindex="3" value="<% if(values.password) { %> <%=values.password %> <% }%>">
+        <span id="password-help" class="help-text help-error"><% if(errors) { %> <%=errors.password %> <% }%></span>
+      </div>
+       <div class="control-group">
+         <script type="text/javascript" src="http://www.google.com/recaptcha/api/challenge?k=<%= recaptcha %>"></script>
+         <noscript>
+           <iframe src="http://www.google.com/recaptcha/api/noscript?k=<%= recaptcha %>" height="300" width="500" frameborder="0"></iframe><br>
+           <textarea name="recaptcha_challenge_field" rows="3" cols="40">
+           </textarea>
+           <input type="hidden" name="recaptcha_response_field" value="manual_challenge">
+         </noscript>
 
-    var setHelpText = function(id, text, type) {
-      $(id).attr('class', 'help-text help-' + type).html(text);
-      setSubmitStatus();
-    };
+         <% if(errors) { %>
+         <span id="recaptcha-help" class="help-text help-error"><%= errors.recaptcha %></span>
+         <% } %>
+      </div>
+      <button id="submit" type="submit" class="btn btn-primary disabled" disabled="disabled" tabindex="5">Create an account</button>
+    </form>
 
-    var setSubmitStatus = function() {
-      var newClass = 'btn btn-primary disabled';
-      var disabled = 'disabled';
+    <script type="text/javascript">
 
-      if($('#username-help').hasClass('help-ok') && $('#email-help').hasClass('help-ok')) {
-        $('#submit').attr('class', 'btn btn-primary').removeAttr('disabled');
-      } else {
-        $('#submit').attr('class', 'btn btn-primary disabled').attr('disabled', disabled);
+      var setHelpText = function(id, text, type) {
+        $(id).attr('class', 'help-text help-' + type).html(text);
+        setSubmitStatus();
+      };
+
+      var setSubmitStatus = function() {
+        var newClass = 'btn btn-primary disabled';
+        var disabled = 'disabled';
+
+        if($('#username-help').hasClass('help-ok') && $('#email-help').hasClass('help-ok')) {
+          $('#submit').attr('class', 'btn btn-primary').removeAttr('disabled');
+        } else {
+          $('#submit').attr('class', 'btn btn-primary disabled').attr('disabled', disabled);
+        }
+      };
+
+      var check = function (id, url) {
+        var inputField = $('#' + id)[0];
+        if (inputField.value && inputField.value != inputField.lastValue) {
+          setHelpText('#' + id + '-help', 'Checking...', 'warning');
+
+          if (inputField.timer) clearTimeout(inputField.timer);
+          inputField.timer = setTimeout(function () {
+            $.ajax({
+              url: url + inputField.value,
+              type: 'post',
+              success: function (jqr) {
+                setHelpText('#' + id + '-help', jqr, 'ok');
+              },
+              error: function(jqr) {
+                setHelpText('#' + id + '-help', jqr.responseText, 'error');
+              }
+            });
+          }, 200);
+
+          inputField.lastValue = inputField.value;
+        }
+      };
+
+      var checkUsername = function() {
+        check('username', '/users/validate/username?value=');
       }
-    };
 
-    var check = function (id, url) {
-      var inputField = $('#' + id)[0];
-      if (inputField.value && inputField.value != inputField.lastValue) {
-        setHelpText('#' + id + '-help', 'Checking...', 'warning');
-
-        if (inputField.timer) clearTimeout(inputField.timer);
-        inputField.timer = setTimeout(function () {
-          $.ajax({
-            url: url + inputField.value,
-            type: 'post',
-            success: function (jqr) {
-              setHelpText('#' + id + '-help', jqr, 'ok');
-            },
-            error: function(jqr) {
-              setHelpText('#' + id + '-help', jqr.responseText, 'error');
-            }
-          });
-        }, 200);
-
-        inputField.lastValue = inputField.value;
+      var checkEmail = function() {
+        check('email', '/users/validate/email?value=');
       }
-    };
 
-    var checkUsername = function() {
-      check('username', '/users/validate/username?value=');
-    }
+      var bindChecker = function(id, checker) {
+        $(id).keyup(checker);
+        checker();
+      }
 
-    var checkEmail = function() {
-      check('email', '/users/validate/email?value=');
-    }
+      $(document).ready(function () {
+          $('#recaptcha_response_field').css({ 'border': ''})
+                                                       .attr('placeholder', 'Enter the CAPTCHA')
+                                                       .attr('tabindex', '4');
 
-    var bindChecker = function(id, checker) {
-      $(id).keyup(checker);
-      checker();
-    }
-
-    $(document).ready(function () {
-      bindChecker('#username', checkUsername);
-      bindChecker('#email', checkEmail);
-    });
-</script>
-<% include footer %>
+          bindChecker('#username', checkUsername);
+          bindChecker('#email', checkEmail);
+      });
+    </script>
+  </body>
+</html>
