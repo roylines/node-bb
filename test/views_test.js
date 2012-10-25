@@ -49,7 +49,7 @@ describe('views', function() {
       views.account(request, response);
       var meta = response.render.args[0][1];
 
-      assert.equal(meta.title, "Manage Your Account");
+      assert.equal(meta.title, "Bendy:Boards");
       assert.equal(meta.description, "Manage Your Account");
     });
   });
@@ -79,7 +79,7 @@ describe('views', function() {
       views.signup(request, response);
       var meta = response.render.args[0][1];
 
-      assert.equal(meta.title, "Register for Bendy:Boards");
+      assert.equal(meta.title, "Bendy:Boards");
       assert.equal(meta.description, "Create your personal account");
       assert.equal(meta.recaptcha, "PUBKEY");
       assert.equal(meta.errors, "ERRORS");
