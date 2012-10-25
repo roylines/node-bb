@@ -15,7 +15,10 @@ header > h1 > a:focus {
   font-family: 'Lobster', cursive;
   -webkit-font-smoothing: antialiased;
   color : #333;
-  font-size: 48px;
+}
+
+header > h1, nav > ul > li, nav {
+  display: inline-block;
 }
 
 a, a:active, a:hover, a:focus {
